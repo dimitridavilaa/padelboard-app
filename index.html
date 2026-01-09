@@ -8,6 +8,10 @@
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 </head>    
 <body class="min-h-full bg-gray-50">
+    <button onclick="showMessage('success', 'Test', 'Probando cerrar')" 
+        style="position: fixed; top: 0; left: 0; width: 100%; padding: 20px; background: red; color: white; z-index: 9999; font-weight: bold;">
+    🔴 PULSA AQUÍ PARA PROBAR SALIDA
+</button>
     <!-- Contenido Principal -->
     <div class="main-content">
         <!-- Pestaña 1: Configurador -->
@@ -1043,7 +1047,7 @@ Beneficios de la app móvil:
                     showMessage(
                         'success', 
                         '✅ ¡Listo!', 
-                        'Marcador actualizado. Que disfruten el partido!'
+                        'Marcador actualizado. Que disfruten el partido.'
                     );
                 }
                 
@@ -1144,6 +1148,7 @@ Beneficios de la app móvil:
             const modal = document.getElementById('messageModal');
             const titleEl = document.getElementById('msgTitle');
             const bodyEl = document.getElementById('msgBody');
+            const btn = modal.querySelector('button');
 
             // Configurar textos
             titleEl.textContent = title;
@@ -1152,9 +1157,23 @@ Beneficios de la app móvil:
             // Cambiar color del título según sea éxito o error
             if (type === 'error') {
                 titleEl.className = "text-2xl font-bold mb-3 text-red-400"; // Rojo para error
+                btn.textContent = "Entendido";
+                btn.onclick = closeMessageModal; // Solo cierra la ventanita
+                
             } else {
                 titleEl.className = "text-2xl font-bold mb-3 text-green-400"; // Verde para éxito
-            }
+                btn.textContent = "Salir";
+                btn.onclick = function() {
+                // Cambiamos texto para que vean que la app está respondiendo
+                btn.textContent = "Cerrando...";
+                btn.style.opacity = "0.7";
+                
+                // Pequeña pausa de 300ms para que lean "Cerrando..." y luego adiós
+                setTimeout(() => {
+                    closeAndExit();
+                }, 500);
+            };
+        }
 
             // Mostrar modal
             document.body.classList.add('modal-open');
@@ -1165,6 +1184,24 @@ Beneficios de la app móvil:
         function closeMessageModal() {
             document.body.classList.remove('modal-open');
             document.getElementById('messageModal').classList.add('hidden');
+        }
+
+        // Función para intentar cerrar la App o salir
+        function closeAndExit() {
+            // 1. Intentamos cerrar la pestaña (Truco para engañar al navegador)
+            try {
+                window.open('','_self').close();
+            } catch (e) {}
+
+            // 2. Intento estándar
+            window.close();
+
+            // 3. FALLBACK SEGURO (Si el navegador bloquea el cierre):
+            // Redirigimos a Google para que "salgan" de tu app obligatoriamente.
+            // Así no se quedan con el control remoto abierto.
+            setTimeout(() => {
+                window.location.href = "https://getpadelboard.com"; 
+            }, 100);
         }
 
         // Funciones de navegación
