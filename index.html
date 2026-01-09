@@ -1029,9 +1029,26 @@ Beneficios de la app móvil:
 
         if (sentViaInternet) {
             setTimeout(() => {
-                alert('☁️ ¡Configuración enviada por Internet!\n\nEl marcador debería actualizarse en unos segundos.');
+                // === LÓGICA CON LOGO ===
+                
+                if (targetID === 'DEMO') {
+                    // CASO ERROR (Sin QR)
+                    showMessage(
+                        'error', 
+                        '❌ ERROR: No se detectó ninguna cancha', 
+                        'Debes escanear el código QR de la cancha para poder enviar la configuración.'
+                    );
+                } else {
+                    // CASO ÉXITO (Con QR)
+                    showMessage(
+                        'success', 
+                        '✅ ¡Listo!', 
+                        'Marcador actualizado. Que disfruten el partido!'
+                    );
+                }
+                
             }, 500);
-            return; // ¡Éxito! No hace falta intentar por WiFi local
+            return; 
         }
 
         // 4. INTENTO 2: FALLBACK LOCAL (WiFi Directo)
@@ -1120,6 +1137,34 @@ Beneficios de la app móvil:
         function closeConfirmModal() {
             document.body.classList.remove('modal-open');
             document.getElementById('confirmModal').classList.add('hidden');
+        }
+
+        // Función para abrir el modal con logo
+        function showMessage(type, title, text) {
+            const modal = document.getElementById('messageModal');
+            const titleEl = document.getElementById('msgTitle');
+            const bodyEl = document.getElementById('msgBody');
+
+            // Configurar textos
+            titleEl.textContent = title;
+            bodyEl.textContent = text;
+
+            // Cambiar color del título según sea éxito o error
+            if (type === 'error') {
+                titleEl.className = "text-2xl font-bold mb-3 text-red-400"; // Rojo para error
+            } else {
+                titleEl.className = "text-2xl font-bold mb-3 text-green-400"; // Verde para éxito
+            }
+
+            // Mostrar modal
+            document.body.classList.add('modal-open');
+            modal.classList.remove('hidden');
+        }
+
+        // Función para cerrar
+        function closeMessageModal() {
+            document.body.classList.remove('modal-open');
+            document.getElementById('messageModal').classList.add('hidden');
         }
 
         // Funciones de navegación
@@ -1779,5 +1824,26 @@ Beneficios de la app móvil:
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98c0e80030e0824f',t:'MTc2MDA0NDY2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
 </script>
+<div id="messageModal" class="modal-overlay hidden" style="z-index: 100; display: flex; align-items: center; justify-content: center;">
+    <div class="modal-glass relative">
+        
+        <div class="flex justify-center mb-6">
+            <img src="logo_padelboard.png" 
+                 alt="PadelBoard" 
+                 class="object-contain" 
+                 style="height: 35px; width: auto; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));">
+        </div>
+        
+        <div class="mb-8">
+            <h2 id="msgTitle" class="text-2xl font-bold mb-3"></h2>
+            <p id="msgBody" class="text-lg opacity-90 px-1 leading-relaxed text-gray-100"></p>
+        </div>
+        
+        <button type="button" onclick="closeMessageModal()" class="btn-glass-action">
+            Entendido
+        </button>
+    </div>
+</div>
+</div>
 </body>
 </html>

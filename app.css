@@ -481,6 +481,53 @@ body.modal-open {
   margin-bottom: 2px; /* Pequeño ajuste visual */
 }
 
+/* ===== MODAL ESTILO VIDRIO (GLASSMORPHISM) ===== */
+.modal-glass {
+  /* Fondo oscuro semi-transparente (Azul noche al 80%) */
+  background: rgba(103, 103, 103, 0.5);
+  
+  /* EL EFECTO DE VIDRIO BORROSO */
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%); /* Obligatorio para iPhone */
+  
+  /* Borde fino y sutil (como el canto de un cristal) */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  
+  /* Sombra suave para profundidad */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  /* Forma y Texto */
+  border-radius: 1.5rem; /* Bordes muy redondeados */
+  color: white;
+  padding: 2rem;
+  max-width: 26rem;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  
+  /* Animación */
+  transform: scale(0.95);
+  animation: modal-fade-in 0.2s ease-out forwards;
+}
+
+/* Botón con estilo cristal más brillante */
+.btn-glass-action {
+  background: var(--blue-600);
+  color: white;
+  font-weight: 800;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.125rem;
+  border: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-glass-action:hover {
+  transform: scale(1.02);
+}
+
 
 /* ===== ESTILOS "PRÓXIMAMENTE" ===== */
 .option-card.option-disabled {
