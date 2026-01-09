@@ -528,6 +528,69 @@ body.modal-open {
   transform: scale(1.02);
 }
 
+/* ===== MODAL AVANZADO (HEADER + SCROLL + FOOTER) ===== */
+
+/* 1. El contenedor principal se vuelve flexible */
+.modal-scrollable-layout {
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh; /* Ocupa máximo el 85% de la altura de la pantalla */
+  overflow: hidden; /* Evita que el contenedor entero tenga scroll */
+  padding: 0 !important; /* Quitamos padding general para manejarlo por secciones */
+}
+
+/* 2. Cabecera Fija (Título y X) */
+.modal-header-fixed {
+  flex-shrink: 0; /* No se encoge */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem; /* p-5 p-6 */
+  border-bottom: 1px solid var(--gray-200);
+  background: white; /* Para tapar el contenido al hacer scroll */
+}
+
+/* 3. Cuerpo Scrollable (Donde van los botones) */
+.modal-body-scroll {
+  flex-grow: 1; /* Ocupa todo el espacio disponible */
+  overflow-y: auto; /* Scroll vertical si hace falta */
+  padding: 1.5rem;
+  /* Scroll suave */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 4. Pie Fijo (Botón Cancelar) */
+.modal-footer-fixed {
+  flex-shrink: 0;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--gray-200);
+  display: flex;       
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo para la X de cerrar */
+.btn-close-x {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--gray-500);
+  padding: 0.5rem;
+  line-height: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-close-x:hover {
+  background: var(--gray-100);
+  color: var(--gray-800);
+}
+
+.w-full {
+  width: 100%;
+}
+
 
 /* ===== ESTILOS "PRÓXIMAMENTE" ===== */
 .option-card.option-disabled {

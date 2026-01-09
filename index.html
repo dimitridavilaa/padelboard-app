@@ -8,10 +8,6 @@
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 </head>    
 <body class="min-h-full bg-gray-50">
-    <button onclick="showMessage('success', 'Test', 'Probando cerrar')" 
-        style="position: fixed; top: 0; left: 0; width: 100%; padding: 20px; background: red; color: white; z-index: 9999; font-weight: bold;">
-    🔴 PULSA AQUÍ PARA PROBAR SALIDA
-</button>
     <!-- Contenido Principal -->
     <div class="main-content">
         <!-- Pestaña 1: Configurador -->
@@ -44,11 +40,11 @@
                                         <div class="pair-body">
                                             <input type="text" id="jugador1" name="jugador1" 
                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors uppercase"
-                                                   placeholder="JUGADOR 1">
+                                                   placeholder="Jugador 1">
                                 
                                             <input type="text" id="jugador2" name="jugador2" 
                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors uppercase"
-                                                   placeholder="JUGADOR 2">
+                                                   placeholder="Jugador 2">
                                         </div>
                                     </div>
                                 
@@ -59,11 +55,11 @@
                                         <div class="pair-body">
                                             <input type="text" id="jugador3" name="jugador3" 
                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors uppercase"
-                                                   placeholder="JUGADOR 3">
+                                                   placeholder="Jugador 3">
                                 
                                             <input type="text" id="jugador4" name="jugador4" 
                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors uppercase"
-                                                   placeholder="JUGADOR 4">
+                                                   placeholder="Jugador 4">
                                         </div>
                                     </div>
                                 
@@ -121,8 +117,8 @@
                                     <button type="button" id="scoring-golden" class="segment-button" onclick="selectScoring('golden', this)">
                                         Punto de Oro
                                     </button>
-                                    <button type="button" id="scoring-advantage" class="segment-button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
-                                        Con Ventaja (Próximamente)
+                                    <button type="button" id="scoring-advantage" class="segment-button" onclick="selectScoring('golden', this)">
+                                        Con Ventaja
                                     </button>
                                 </div>
                             </div>
@@ -626,51 +622,65 @@
         </div>
     </div>
 
-    <div id="gameTypeModal" class="modal-overlay hidden">
-        <div class="modal-content">
+    <div id="gameTypeModal" class="modal-overlay hidden" style="z-index: 60; display: flex; align-items: center; justify-content: center;">
+        <div class="modal-content modal-scrollable-layout md:w-full md:max-w-md">
+            
+            <div class="modal-header-fixed">
+                <h2 class="text-2xl font-bold text-gray-800 m-0">
+                    Selecciona un Formato
+                </h2>
+                <button type="button" onclick="closeGameTypeModal()" class="btn-close-x" aria-label="Cerrar">
+                    &times;
+                </button>
+            </div>
       
-          <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-              Selecciona un Formato de Juego
-          </h2>
+            <div class="modal-body-scroll">
+                <div class="game-type-button-list">
+                    
+                    <button type="button" onclick="selectGameTypeFromModal('3sets', 'Al mejor de 3', 'Formato clásico (por defecto)')">
+                        <h3>Al mejor de 3</h3>
+                        <p>Partidos estándar (1-3 sets)</p>
+                    </button>
+                    
+                    <button type="button" onclick="selectGameTypeFromModal('2sets-super', '2 Sets + Super Tie', 'Formato de torneo (tie-break a 10)')">
+                        <h3>2 Sets + Super Tie</h3>
+                        <p>Formato de torneo (tie-break a 10)</p>
+                    </button>
+                    
+                    <button type="button" onclick="selectGameTypeFromModal('1set', '1 Set', 'Partido único')">
+                        <h3>1 Set</h3>
+                        <p>Un solo set, ideal para partidos rápidos</p>
+                    </button>
+                    
+                    <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
+                        <h3 style="color: #6b7280;">Solo Tie-break (Próximamente)</h3>
+                        <p>Gana el primero en llegar a 7 puntos</p>
+                    </button>
+                    
+                    <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
+                        <h3 style="color: #6b7280;">Super Tie-break (Próximamente)</h3>
+                        <p>Gana el primero en llegar a 10 puntos</p>
+                    </button>
+                    
+                    <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
+                        <h3 style="color: #6b7280;">Juego Rápido (Próximamente)</h3>
+                        <p>Un set corto a 4 games</p>
+                    </button>
+                </div>
+            </div>
       
-          <div class="game-type-button-list">
-              <button type="button" onclick="selectGameTypeFromModal('3sets', 'Al mejor de 3', 'Formato clásico (por defecto)')">
-                  <h3>Al mejor de 3</h3>
-                  <p>Partidos estándar (1-3 sets)</p>
-              </button>
-              <button type="button" onclick="selectGameTypeFromModal('2sets-super', '2 Sets + Super Tie', 'Formato de torneo (tie-break a 10)')">
-                <h3>2 Sets + Super Tie</h3>
-                <p>Formato de torneo (tie-break a 10)</p>
-            </button>
-              <button type="button" onclick="selectGameTypeFromModal('1set', '1 Set', 'Partido único')">
-                  <h3>1 Set</h3>
-                  <p>Un solo set, ideal para partidos rápidos</p>
-              </button>
-              <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
-                <h3 style="color: #6b7280;">Solo Tie-break (Próximamente)</h3>
-                <p>Gana el primero en llegar a 7 puntos</p>
-            </button>
-            <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
-                <h3 style="color: #6b7280;">Super Tie-break (Próximamente)</h3>
-                <p>Gana el primero en llegar a 10 puntos</p>
-            </button>
-            <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
-                <h3 style="color: #6b7280;">Juego Rápido (Próximamente)</h3>
-                <p>Un set corto a 4 games</p>
-            </button>
-          </div>
-      
-          <div class="modal-actions">
-              <button type="button" onclick="closeGameTypeModal()" 
-                      class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl text-lg transition-colors">
-                  Cancelar
-              </button>
-          </div>
+            <div class="modal-footer-fixed">
+                <button type="button" onclick="closeGameTypeModal()" 
+                        class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl text-lg transition-colors">
+                    Cancelar
+                </button>
+            </div>
+            
         </div>
-      </div>
+    </div>
 
     <!-- Modal Resumen del Partido -->
-    <div id="confirmModal" class="modal-overlay hidden">
+    <div id="confirmModal" class="modal-overlay hidden" style="display: flex; align-items: center; justify-content: center;">
         <div class="modal-content">
     
             <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
@@ -1047,7 +1057,7 @@ Beneficios de la app móvil:
                     showMessage(
                         'success', 
                         '✅ ¡Listo!', 
-                        'Marcador actualizado. Que disfruten el partido.'
+                        'Marcador actualizado.<br>¡A jugar!'
                     );
                 }
                 
@@ -1113,7 +1123,6 @@ Beneficios de la app móvil:
         }
 
         function openConfirmModal(event) {
-            document.body.classList.add('modal-open');
             event.preventDefault(); // Evita que el formulario se envíe
 
             // 1. Recopilamos y validamos
@@ -1133,9 +1142,10 @@ Beneficios de la app móvil:
                 return;
             }
 
-            // 2. Si todo está bien, actualiza el resumen y muestra el modal
-            updateSummary(); // Asegura que el resumen esté actualizado
-            document.getElementById('confirmModal').classList.remove('hidden');
+            // 2. Si todo está bien, AHORA SÍ bloqueamos y mostramos
+            updateSummary(); 
+            document.body.classList.add('modal-open'); // Bloqueamos el scroll
+            document.getElementById('confirmModal').classList.remove('hidden'); // Mostramos el modal
         }
 
         function closeConfirmModal() {
@@ -1152,7 +1162,7 @@ Beneficios de la app móvil:
 
             // Configurar textos
             titleEl.textContent = title;
-            bodyEl.textContent = text;
+            bodyEl.innerHTML = text;
 
             // Cambiar color del título según sea éxito o error
             if (type === 'error') {
