@@ -706,16 +706,36 @@
     // ==========================================
     // LÓGICA MQTT (CONEXIÓN A INTERNET)
     // ==========================================
+    // LÓGICA DE CANALES DINÁMICOS (SEGURIDAD)
+    // ==========================================
     let mqttClient = null;
     let mqttConnected = false;
 
-    // Credenciales de HiveMQ (Extraídas del archivo)
+    // 1. Detectamos qué cancha se quiere controlar leyendo la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const COURT_ID = urlParams.get('id'); 
+
+    // SEGURIDAD: Si no hay ID en la URL, usamos 'DEMO'
+    // Así evitamos que controlen tu marcador por accidente.
+    const targetID = COURT_ID ? COURT_ID : 'DEMO';
+
+    // 2. Configuramos MQTT
     const MQTT_CFG = {
         url: "wss://8710939c545d4dc7adc1804a0bd323fb.s1.eu.hivemq.cloud:8884/mqtt",
         username: "padelboard_pb2",
         password: "Aqeria123",
-        topicConfig: "padelboard/PB2/config"
+        // El tópico cambia según lo que diga la URL
+        topicConfig: `padelboard/${targetID}/config`
     };
+
+    console.log("ID Objetivo:", targetID);
+    
+    // (Opcional) Avisar si está en modo demo
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!COURT_ID) {
+            console.warn("⚠️ MODO DEMO: Sin ID de cancha.");
+        }
+    });
 
     function mqttConnect() {
         console.log("Iniciando conexión MQTT...");
