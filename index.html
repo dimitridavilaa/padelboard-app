@@ -19,8 +19,13 @@
                         <div class="flex items-center justify-center mb-4">
                             <img src="logo_padelboard.png" alt="Logo PadelBoard" class="app-logo">
                         </div>
-                        <h1 class="text-3xl font-bold text-white mb-3">Configurador de Partido</h1> 
-                        <p class="text-lg text-white opacity-90">Configura tu partido de pádel con todos los detalles. Elige el formato, sistema de puntuación y más.</p>
+                        <!-- Selector de idioma -->
+                        <div class="lang-switch" role="group" aria-label="Idioma / Language">
+                            <button type="button" data-lang="es" onclick="setLanguage('es')">ES</button>
+                            <button type="button" data-lang="en" onclick="setLanguage('en')">EN</button>
+                        </div>
+                        <h1 class="text-3xl font-bold text-white mb-3" data-i18n="header.title">Configurador de Partido</h1> 
+                        <p class="text-lg text-white opacity-90" data-i18n="header.subtitle">Configura tu partido de pádel con todos los detalles. Elige el formato, sistema de puntuación y más.</p>
                     </div>
 
                     <!-- Formulario Principal -->
@@ -28,38 +33,38 @@
                         <form id="configuracionForm">
                             <!-- Jugadores -->
                             <div class="mb-8">
-                                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center">
+                                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center" data-i18n="players.title">
                                     Jugadores
                                 </h2>
                                 <div>
 
                                     <div class="pair-card mb-4">
                                         <div class="pair-header">
-                                            <h3>Pareja 1</h3>
+                                            <h3 data-i18n="players.pair1">Pareja 1</h3>
                                         </div>
                                         <div class="pair-body">
                                             <input type="text" id="jugador1" name="jugador1" 
                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors uppercase"
-                                                   placeholder="Jugador 1">
+                                                   placeholder="Jugador 1" data-i18n-placeholder="players.p1">
                                 
                                             <input type="text" id="jugador2" name="jugador2" 
                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors uppercase"
-                                                   placeholder="Jugador 2">
+                                                   placeholder="Jugador 2" data-i18n-placeholder="players.p2">
                                         </div>
                                     </div>
                                 
                                     <div class="pair-card">
                                         <div class="pair-header">
-                                            <h3>Pareja 2</h3>
+                                            <h3 data-i18n="players.pair2">Pareja 2</h3>
                                         </div>
                                         <div class="pair-body">
                                             <input type="text" id="jugador3" name="jugador3" 
                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors uppercase"
-                                                   placeholder="Jugador 3">
+                                                   placeholder="Jugador 3" data-i18n-placeholder="players.p3">
                                 
                                             <input type="text" id="jugador4" name="jugador4" 
                                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition-colors uppercase"
-                                                   placeholder="Jugador 4">
+                                                   placeholder="Jugador 4" data-i18n-placeholder="players.p4">
                                         </div>
                                     </div>
                                 
@@ -67,7 +72,7 @@
 
                             <!-- Tipo de Juego -->
                             <div class="mb-8">
-                                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center">
+                                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center" data-i18n="gameType.title">
                                     Tipo de Juego
                                 </h2>
                                 <div class="game-type-summary-card">
@@ -75,7 +80,7 @@
                                         <h3 id="game-type-summary-title">Al mejor de 3</h3>
                                         <p id="game-type-summary-desc">Formato clásico (por defecto)</p>
                                     </div>
-                                    <button type="button" class="change-button" onclick="openGameTypeModal()">
+                                    <button type="button" class="change-button" onclick="openGameTypeModal()" data-i18n="common.change">
                                         Cambiar
                                     </button>
                                 </div>
@@ -110,11 +115,11 @@
 
                             <!-- Sistema de Puntuación -->
                             <div class="mb-8">
-                                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center">
+                                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center" data-i18n="scoring.title">
                                     Sistema de Puntuación
                                 </h2>
                                 <div class="segmented-control">
-                                    <button type="button" id="scoring-golden" class="segment-button" onclick="selectScoring('golden', this)">
+                                    <button type="button" id="scoring-golden" class="segment-button" onclick="selectScoring('golden', this)" data-i18n="scoring.golden">
                                         Punto de Oro
                                     </button>
                                     <button type="button" id="scoring-advantage" class="segment-button" onclick="selectScoring('star_point', this)">
@@ -125,17 +130,17 @@
 
                             <!-- Cambio de Lado -->
                             <div class="mb-8">
-                                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center">
+                                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center" data-i18n="side.title">
                                     Cambio de Lado
                                 </h2>
                                 <div class="segmented-control">
-                                    <button type="button" id="side-odd" class="segment-button" onclick="selectSideChange('odd', this)">
+                                    <button type="button" id="side-odd" class="segment-button" onclick="selectSideChange('odd', this)" data-i18n="side.odd">
                                         Juegos Impares
                                     </button>
-                                    <button type="button" id="side-set" class="segment-button" onclick="selectSideChange('set', this)">
+                                    <button type="button" id="side-set" class="segment-button" onclick="selectSideChange('set', this)" data-i18n="side.set">
                                         Final de Set
                                     </button>
-                                    <button type="button" id="side-none" class="segment-button" onclick="selectSideChange('none', this)">
+                                    <button type="button" id="side-none" class="segment-button" onclick="selectSideChange('none', this)" data-i18n="side.none">
                                         Sin Cambio
                                     </button>
                                 </div>        
@@ -161,15 +166,15 @@
                                 <button type="button" onclick="toggleAdvanced()" id="advBtn"
                                         style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--gray-600);font-size:0.8rem;font-weight:600;font-family:inherit;padding:4px 0;letter-spacing:0.02em;-webkit-tap-highlight-color:transparent;">
                                     <span id="advChevron" style="font-size:0.9rem;transition:transform 0.25s;display:inline-block;">›</span>
-                                    Opciones avanzadas
+                                    <span data-i18n="advanced.title">Opciones avanzadas</span>
                                 </button>
                                 <div id="advSection" style="display:none;overflow:hidden;margin-top:12px;flex-direction:column;gap:10px;">
                                     <label class="toggle-card">
                                         <input type="checkbox" id="onlyGamesMode" class="toggle-card-input">
                                         <div class="toggle-card-body">
                                             <div class="toggle-card-text">
-                                                <span class="toggle-card-title">Solo Sumar Games</span>
-                                                <span class="toggle-card-desc">Ideal para no tocar el sensor en cada punto. Ignora 15, 30, 40 y suma el game directo.</span>
+                                                <span class="toggle-card-title" data-i18n="advanced.onlyGames">Solo Sumar Games</span>
+                                                <span class="toggle-card-desc" data-i18n="advanced.onlyGamesDesc">Ideal para no tocar el sensor en cada punto. Ignora 15, 30, 40 y suma el game directo.</span>
                                             </div>
                                             <span class="toggle-pill"><span class="toggle-thumb"></span></span>
                                         </div>
@@ -178,8 +183,8 @@
                                         <input type="checkbox" id="tournamentMode" class="toggle-card-input">
                                         <div class="toggle-card-body">
                                             <div class="toggle-card-text">
-                                                <span class="toggle-card-title">Modo Torneo</span>
-                                                <span class="toggle-card-desc">Cambio de lado obligatorio en Tie-breaks (cada 6 pts)</span>
+                                                <span class="toggle-card-title" data-i18n="advanced.tournament">Modo Torneo</span>
+                                                <span class="toggle-card-desc" data-i18n="advanced.tournamentDesc">Cambio de lado obligatorio en Tie-breaks (cada 6 pts)</span>
                                             </div>
                                             <span class="toggle-pill"><span class="toggle-thumb"></span></span>
                                         </div>
@@ -189,11 +194,11 @@
 
                             <!-- Botones de Acción -->
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <button type="button" onclick="openConfirmModal(event)" 
+                                <button type="button" onclick="openConfirmModal(event)" data-i18n="actions.start"
                                         class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-colors">
                                     Iniciar Partido
                                 </button>
-                                <button type="button" onclick="resetConfig()" 
+                                <button type="button" onclick="resetConfig()" data-i18n="actions.reset"
                                         class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-4 px-8 rounded-xl text-lg transition-colors">
                                     Reiniciar Configuración
                                 </button>
@@ -638,10 +643,10 @@
         <div class="modal-content modal-scrollable-layout md:w-full md:max-w-md">
             
             <div class="modal-header-fixed">
-                <h2 class="text-2xl font-bold text-gray-800 m-0">
+                <h2 class="text-2xl font-bold text-gray-800 m-0" data-i18n="gameTypeModal.title">
                     Selecciona un Formato
                 </h2>
-                <button type="button" onclick="closeGameTypeModal()" class="btn-close-x" aria-label="Cerrar">
+                <button type="button" onclick="closeGameTypeModal()" class="btn-close-x" aria-label="Cerrar" data-i18n-aria-label="common.close">
                     &times;
                 </button>
             </div>
@@ -649,40 +654,40 @@
             <div class="modal-body-scroll">
                 <div class="game-type-button-list">
                     
-                    <button type="button" onclick="selectGameTypeFromModal('3sets', 'Al mejor de 3', 'Formato clásico (por defecto)')">
-                        <h3>Al mejor de 3</h3>
-                        <p>Partidos estándar (1-3 sets)</p>
+                    <button type="button" onclick="selectGameTypeFromModal('3sets')">
+                        <h3 data-i18n="gameTypes.3sets.title">Al mejor de 3</h3>
+                        <p data-i18n="gameTypes.3sets.desc">Partidos estándar (1-3 sets)</p>
                     </button>
                     
-                    <button type="button" onclick="selectGameTypeFromModal('2sets-super', '2 Sets + Super Tie', 'Formato de torneo (tie-break a 10)')">
-                        <h3>2 Sets + Super Tie</h3>
-                        <p>Formato de torneo (tie-break a 10)</p>
+                    <button type="button" onclick="selectGameTypeFromModal('2sets-super')">
+                        <h3 data-i18n="gameTypes.2sets-super.title">2 Sets + Super Tie</h3>
+                        <p data-i18n="gameTypes.2sets-super.desc">Formato de torneo (tie-break a 10)</p>
                     </button>
                     
-                    <button type="button" onclick="selectGameTypeFromModal('1set', '1 Set', 'Partido único')">
-                        <h3>1 Set</h3>
-                        <p>Un solo set, ideal para partidos rápidos</p>
-                    </button>
-                    
-                    <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
-                        <h3 style="color: #6b7280;">Solo Tie-break (Próximamente)</h3>
-                        <p>Gana el primero en llegar a 7 puntos</p>
+                    <button type="button" onclick="selectGameTypeFromModal('1set')">
+                        <h3 data-i18n="gameTypes.1set.title">1 Set</h3>
+                        <p data-i18n="gameTypes.1set.desc">Un solo set, ideal para partidos rápidos</p>
                     </button>
                     
                     <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
-                        <h3 style="color: #6b7280;">Super Tie-break (Próximamente)</h3>
-                        <p>Gana el primero en llegar a 10 puntos</p>
+                        <h3 style="color: #6b7280;" data-i18n="gameTypes.tiebreak.title">Solo Tie-break (Próximamente)</h3>
+                        <p data-i18n="gameTypes.tiebreak.desc">Gana el primero en llegar a 7 puntos</p>
                     </button>
                     
                     <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
-                        <h3 style="color: #6b7280;">Juego Rápido (Próximamente)</h3>
-                        <p>Un set corto a 4 games</p>
+                        <h3 style="color: #6b7280;" data-i18n="gameTypes.super-tiebreak.title">Super Tie-break (Próximamente)</h3>
+                        <p data-i18n="gameTypes.super-tiebreak.desc">Gana el primero en llegar a 10 puntos</p>
+                    </button>
+                    
+                    <button type="button" disabled style="opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6;">
+                        <h3 style="color: #6b7280;" data-i18n="gameTypes.quick.title">Juego Rápido (Próximamente)</h3>
+                        <p data-i18n="gameTypes.quick.desc">Un set corto a 4 games</p>
                     </button>
                 </div>
             </div>
       
             <div class="modal-footer-fixed">
-                <button type="button" onclick="closeGameTypeModal()" 
+                <button type="button" onclick="closeGameTypeModal()" data-i18n="common.cancel"
                         class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl text-lg transition-colors">
                     Cancelar
                 </button>
@@ -695,31 +700,31 @@
     <div id="confirmModal" class="modal-overlay hidden" style="display: flex; align-items: center; justify-content: center;">
         <div class="modal-content">
     
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center" data-i18n="confirm.title">
                 Resumen del Partido
             </h2>
             
             <div id="configSummaryList" class="summary-list">
                 
                 <div class="summary-group">
-                    <h3 class="summary-title">Equipos</h3>
+                    <h3 class="summary-title" data-i18n="confirm.teams">Equipos</h3>
                     <div id="teams-summary" class="summary-details">
                         </div>
                 </div>
                 
                 <div class="summary-group">
-                    <h3 class="summary-title">Formato</h3>
+                    <h3 class="summary-title" data-i18n="confirm.format">Formato</h3>
                     <div id="format-summary" class="summary-details">
                         </div>
                 </div>
             </div>
             
             <div class="modal-actions">
-                <button type="button" onclick="closeConfirmModal()" 
+                <button type="button" onclick="closeConfirmModal()" data-i18n="common.cancel"
                         class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl text-lg transition-colors">
                     Cancelar
                 </button>
-                <button type="button" onclick="startMatch()" 
+                <button type="button" onclick="startMatch()" data-i18n="confirm.confirm"
                         class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl text-lg transition-colors">
                     Confirmar e Iniciar
                 </button>
@@ -729,6 +734,214 @@
     </div>
 
     <script>
+    // ==========================================
+    // IDIOMAS (ES / EN)
+    // ==========================================
+    // Los textos del HTML usan data-i18n="clave" (texto), data-i18n-placeholder
+    // y data-i18n-aria-label. Los textos generados desde JS usan t('clave').
+    const I18N = {
+        es: {
+            'page.title': 'PadelBoard - App',
+            'header.title': 'Configurador de Partido',
+            'header.subtitle': 'Configura tu partido de pádel con todos los detalles. Elige el formato, sistema de puntuación y más.',
+            'players.title': 'Jugadores',
+            'players.pair1': 'Pareja 1',
+            'players.pair2': 'Pareja 2',
+            'players.p1': 'Jugador 1',
+            'players.p2': 'Jugador 2',
+            'players.p3': 'Jugador 3',
+            'players.p4': 'Jugador 4',
+            'gameType.title': 'Tipo de Juego',
+            'common.change': 'Cambiar',
+            'common.cancel': 'Cancelar',
+            'common.close': 'Cerrar',
+            'common.notSelected': 'No seleccionado',
+            'scoring.title': 'Sistema de Puntuación',
+            'scoring.golden': 'Punto de Oro',
+            'scoring.star_point': 'Star Point',
+            'side.title': 'Cambio de Lado',
+            'side.odd': 'Juegos Impares',
+            'side.set': 'Final de Set',
+            'side.none': 'Sin Cambio',
+            'advanced.title': 'Opciones avanzadas',
+            'advanced.onlyGames': 'Solo Sumar Games',
+            'advanced.onlyGamesDesc': 'Ideal para no tocar el sensor en cada punto. Ignora 15, 30, 40 y suma el game directo.',
+            'advanced.tournament': 'Modo Torneo',
+            'advanced.tournamentDesc': 'Cambio de lado obligatorio en Tie-breaks (cada 6 pts)',
+            'actions.start': 'Iniciar Partido',
+            'actions.reset': 'Reiniciar Configuración',
+            'gameTypeModal.title': 'Selecciona un Formato',
+            'gameTypes.3sets.title': 'Al mejor de 3',
+            'gameTypes.3sets.desc': 'Partidos estándar (1-3 sets)',
+            'gameTypes.3sets.summary': 'Formato clásico (por defecto)',
+            'gameTypes.3sets.long': 'Al mejor de 3 sets',
+            'gameTypes.2sets-super.title': '2 Sets + Super Tie',
+            'gameTypes.2sets-super.desc': 'Formato de torneo (tie-break a 10)',
+            'gameTypes.2sets-super.summary': 'Formato de torneo (tie-break a 10)',
+            'gameTypes.2sets-super.long': '2 Sets + Super Tie-break',
+            'gameTypes.1set.title': '1 Set',
+            'gameTypes.1set.desc': 'Un solo set, ideal para partidos rápidos',
+            'gameTypes.1set.summary': 'Partido único',
+            'gameTypes.1set.long': '1 Set',
+            'gameTypes.tiebreak.title': 'Solo Tie-break (Próximamente)',
+            'gameTypes.tiebreak.desc': 'Gana el primero en llegar a 7 puntos',
+            'gameTypes.tiebreak.long': 'Solo Tie-break (7 puntos)',
+            'gameTypes.super-tiebreak.title': 'Super Tie-break (Próximamente)',
+            'gameTypes.super-tiebreak.desc': 'Gana el primero en llegar a 10 puntos',
+            'gameTypes.super-tiebreak.long': 'Solo Super Tie-break (10 puntos)',
+            'gameTypes.quick.title': 'Juego Rápido (Próximamente)',
+            'gameTypes.quick.desc': 'Un set corto a 4 games',
+            'gameTypes.quick.long': 'Juego Rápido (4 games)',
+            'gameTypes.custom': 'Personalizado ({n} games)',
+            'confirm.title': 'Resumen del Partido',
+            'confirm.teams': 'Equipos',
+            'confirm.format': 'Formato',
+            'confirm.type': 'Tipo',
+            'confirm.scoring': 'Puntuación',
+            'confirm.side': 'Cambio lado',
+            'confirm.confirm': 'Confirmar e Iniciar',
+            'alert.missingPlayers': 'Por favor, completa todos los nombres de los jugadores.',
+            'alert.missingConfig': 'Por favor, completa toda la configuración del partido.',
+            'alert.sentLocal': '📡 Enviado por WiFi Local.\n\n(Asegúrate de estar conectado a la red PadelBoard_AP)',
+            'alert.connectionError': '❌ ERROR DE CONEXIÓN\n\nNo se pudo enviar ni por Internet ni por WiFi Local.\n\n1. Revisa tu conexión a internet.\n2. O conéctate al WiFi del marcador.',
+            'msg.noCourtTitle': '❌ ERROR: No se detectó ninguna cancha',
+            'msg.noCourtBody': 'Debes escanear el código QR de la cancha para poder enviar la configuración.',
+            'msg.successTitle': '✅ ¡Listo!',
+            'msg.successBody': 'Marcador actualizado.<br>¡A jugar!',
+            'msg.ok': 'Entendido',
+            'msg.exit': 'Salir',
+            'msg.closing': 'Cerrando...'
+        },
+        en: {
+            'page.title': 'PadelBoard - App',
+            'header.title': 'Match Setup',
+            'header.subtitle': 'Set up your padel match in detail. Choose the format, scoring system and more.',
+            'players.title': 'Players',
+            'players.pair1': 'Team 1',
+            'players.pair2': 'Team 2',
+            'players.p1': 'Player 1',
+            'players.p2': 'Player 2',
+            'players.p3': 'Player 3',
+            'players.p4': 'Player 4',
+            'gameType.title': 'Match Format',
+            'common.change': 'Change',
+            'common.cancel': 'Cancel',
+            'common.close': 'Close',
+            'common.notSelected': 'Not selected',
+            'scoring.title': 'Scoring System',
+            'scoring.golden': 'Golden Point',
+            'scoring.star_point': 'Star Point',
+            'side.title': 'Side Change',
+            'side.odd': 'Odd Games',
+            'side.set': 'End of Set',
+            'side.none': 'No Change',
+            'advanced.title': 'Advanced options',
+            'advanced.onlyGames': 'Games Only',
+            'advanced.onlyGamesDesc': 'No need to tap the sensor every point. Skips 15, 30, 40 and adds the game directly.',
+            'advanced.tournament': 'Tournament Mode',
+            'advanced.tournamentDesc': 'Mandatory side change during tie-breaks (every 6 pts)',
+            'actions.start': 'Start Match',
+            'actions.reset': 'Reset Settings',
+            'gameTypeModal.title': 'Choose a Format',
+            'gameTypes.3sets.title': 'Best of 3',
+            'gameTypes.3sets.desc': 'Standard match (1-3 sets)',
+            'gameTypes.3sets.summary': 'Classic format (default)',
+            'gameTypes.3sets.long': 'Best of 3 sets',
+            'gameTypes.2sets-super.title': '2 Sets + Super Tie',
+            'gameTypes.2sets-super.desc': 'Tournament format (tie-break to 10)',
+            'gameTypes.2sets-super.summary': 'Tournament format (tie-break to 10)',
+            'gameTypes.2sets-super.long': '2 Sets + Super Tie-break',
+            'gameTypes.1set.title': '1 Set',
+            'gameTypes.1set.desc': 'A single set, great for quick matches',
+            'gameTypes.1set.summary': 'Single set',
+            'gameTypes.1set.long': '1 Set',
+            'gameTypes.tiebreak.title': 'Tie-break Only (Coming soon)',
+            'gameTypes.tiebreak.desc': 'First to 7 points wins',
+            'gameTypes.tiebreak.long': 'Tie-break Only (7 points)',
+            'gameTypes.super-tiebreak.title': 'Super Tie-break (Coming soon)',
+            'gameTypes.super-tiebreak.desc': 'First to 10 points wins',
+            'gameTypes.super-tiebreak.long': 'Super Tie-break Only (10 points)',
+            'gameTypes.quick.title': 'Quick Match (Coming soon)',
+            'gameTypes.quick.desc': 'A short set to 4 games',
+            'gameTypes.quick.long': 'Quick Match (4 games)',
+            'gameTypes.custom': 'Custom ({n} games)',
+            'confirm.title': 'Match Summary',
+            'confirm.teams': 'Teams',
+            'confirm.format': 'Format',
+            'confirm.type': 'Type',
+            'confirm.scoring': 'Scoring',
+            'confirm.side': 'Side change',
+            'confirm.confirm': 'Confirm & Start',
+            'alert.missingPlayers': 'Please fill in all player names.',
+            'alert.missingConfig': 'Please complete the whole match setup.',
+            'alert.sentLocal': '📡 Sent via local WiFi.\n\n(Make sure you are connected to the PadelBoard_AP network)',
+            'alert.connectionError': '❌ CONNECTION ERROR\n\nCould not send via Internet or local WiFi.\n\n1. Check your internet connection.\n2. Or connect to the scoreboard WiFi.',
+            'msg.noCourtTitle': '❌ ERROR: No court detected',
+            'msg.noCourtBody': 'Scan the court QR code to send the settings.',
+            'msg.successTitle': '✅ All set!',
+            'msg.successBody': 'Scoreboard updated.<br>Let\'s play!',
+            'msg.ok': 'Got it',
+            'msg.exit': 'Exit',
+            'msg.closing': 'Closing...'
+        }
+    };
+
+    const SUPPORTED_LANGS = ['es', 'en'];
+    const LANG_STORAGE_KEY = 'padelboard_lang';
+
+    // Prioridad: ?lang= en la URL > idioma guardado > idioma del navegador > español
+    function detectLanguage() {
+        const fromUrl = new URLSearchParams(window.location.search).get('lang');
+        if (SUPPORTED_LANGS.includes(fromUrl)) return fromUrl;
+        try {
+            const saved = localStorage.getItem(LANG_STORAGE_KEY);
+            if (SUPPORTED_LANGS.includes(saved)) return saved;
+        } catch (e) {}
+        const browser = (navigator.language || 'es').slice(0, 2).toLowerCase();
+        return browser === 'en' ? 'en' : 'es';
+    }
+
+    let currentLang = detectLanguage();
+
+    function t(key, vars) {
+        let text = I18N[currentLang][key] ?? I18N.es[key] ?? key;
+        if (vars) {
+            Object.keys(vars).forEach(k => { text = text.replace(`{${k}}`, vars[k]); });
+        }
+        return text;
+    }
+
+    function applyLanguage() {
+        document.documentElement.lang = currentLang;
+        document.title = t('page.title');
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            el.textContent = t(el.dataset.i18n);
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            el.placeholder = t(el.dataset.i18nPlaceholder);
+        });
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+            el.setAttribute('aria-label', t(el.dataset.i18nAriaLabel));
+        });
+
+        document.querySelectorAll('.lang-switch button').forEach(btn => {
+            btn.classList.toggle('selected', btn.dataset.lang === currentLang);
+            btn.setAttribute('aria-pressed', btn.dataset.lang === currentLang);
+        });
+
+        // Textos que dependen del estado actual
+        renderGameTypeSummary();
+        updateSummary();
+    }
+
+    function setLanguage(lang) {
+        if (!SUPPORTED_LANGS.includes(lang)) return;
+        currentLang = lang;
+        try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (e) {}
+        applyLanguage();
+    }
+
     // ==========================================
     // LÓGICA MQTT (CONEXIÓN A INTERNET)
     // ==========================================
@@ -875,7 +1088,12 @@ Beneficios de la app móvil:
             document.getElementById('gameTypeModal').classList.add('hidden');
         }
 
-        function selectGameTypeFromModal(type, title, desc) {
+        function renderGameTypeSummary() {
+            document.getElementById('game-type-summary-title').textContent = t(`gameTypes.${config.gameType}.title`);
+            document.getElementById('game-type-summary-desc').textContent = t(`gameTypes.${config.gameType}.summary`);
+        }
+
+        function selectGameTypeFromModal(type) {
             // 1. Actualizar la config global
             config.gameType = type;
 
@@ -890,8 +1108,7 @@ Beneficios de la app móvil:
             // --- FIN DEL CAMBIO ---
 
             // 2. Actualizar la tarjeta resumen en la página principal
-            document.getElementById('game-type-summary-title').textContent = title;
-            document.getElementById('game-type-summary-desc').textContent = desc;
+            renderGameTypeSummary();
 
             // 3. Cerrar el modal
             closeGameTypeModal();
@@ -966,53 +1183,33 @@ Beneficios de la app móvil:
 
         function updateSummary() {
             const players = {
-                jugador1: document.getElementById('jugador1').value || 'Jugador 1',
-                jugador2: document.getElementById('jugador2').value || 'Jugador 2',
-                jugador3: document.getElementById('jugador3').value || 'Jugador 3',
-                jugador4: document.getElementById('jugador4').value || 'Jugador 4'
+                jugador1: document.getElementById('jugador1').value || t('players.p1'),
+                jugador2: document.getElementById('jugador2').value || t('players.p2'),
+                jugador3: document.getElementById('jugador3').value || t('players.p3'),
+                jugador4: document.getElementById('jugador4').value || t('players.p4')
             };
 
-            const gameTypes = {
-                '1set': '1 Set',
-                '3sets': 'Al mejor de 3 sets',
-                '2sets-super': '2 Sets + Super Tie-break',
-                'tiebreak': 'Solo Tie-break (7 puntos)',
-                'super-tiebreak': 'Solo Super Tie-break (10 puntos)',
-                'quick': 'Juego Rápido (4 games)'
-            };
+            const notSelected = t('common.notSelected');
 
-            let gameTypeText = gameTypes[config.gameType] || 'No seleccionado';
+            let gameTypeText = config.gameType ? t(`gameTypes.${config.gameType}.long`) : notSelected;
             if (config.gameType && config.gameType.startsWith('custom-')) {
                 const numGames = config.gameType.split('-')[1];
-                gameTypeText = `Personalizado (${numGames} games)`;
+                gameTypeText = t('gameTypes.custom', { n: numGames });
             }
 
-            const scoringTypes = {
-                'golden': 'Punto de Oro',
-                'star_point': 'Star Point'
-            };
-
-            const countingMethodTypes = {
-                'players': 'Modo Jugadores',
-                'referee': 'Modo Árbitro'
-            };
-
-            const sideChangeTypes = {
-                'odd': 'Juegos impares',
-                'set': 'Final de set',
-                'none': 'Sin cambio'
-            };
+            const scoringText = config.scoring ? t(`scoring.${config.scoring}`) : notSelected;
+            const sideChangeText = config.sideChange ? t(`side.${config.sideChange}`) : notSelected;
 
             // Actualizar cada recuadro por separado
             document.getElementById('teams-summary').innerHTML = `
-                <p class="mb-2"><strong>Pareja 1:</strong> ${players.jugador1} / ${players.jugador2}</p>
-                <p><strong>Pareja 2:</strong> ${players.jugador3} / ${players.jugador4}</p>
+                <p class="mb-2"><strong>${t('players.pair1')}:</strong> ${players.jugador1} / ${players.jugador2}</p>
+                <p><strong>${t('players.pair2')}:</strong> ${players.jugador3} / ${players.jugador4}</p>
             `;
 
             document.getElementById('format-summary').innerHTML = `
-                <p class="mb-2"><strong>Tipo:</strong> ${gameTypeText}</p>
-                <p><strong>Puntuación:</strong> ${scoringTypes[config.scoring] || 'No seleccionado'}</p>
-                <p><strong>Cambio lado:</strong> ${sideChangeTypes[config.sideChange] || 'No seleccionado'}</p>
+                <p class="mb-2"><strong>${t('confirm.type')}:</strong> ${gameTypeText}</p>
+                <p><strong>${t('confirm.scoring')}:</strong> ${scoringText}</p>
+                <p><strong>${t('confirm.side')}:</strong> ${sideChangeText}</p>
             `;
         }
 
@@ -1029,7 +1226,7 @@ Beneficios de la app móvil:
         };
 
         if (!players.jugador1 || !players.jugador2 || !players.jugador3 || !players.jugador4) {
-            alert('Por favor, completa todos los nombres de los jugadores.');
+            alert(t('alert.missingPlayers'));
             return;
         }
 
@@ -1064,18 +1261,10 @@ Beneficios de la app móvil:
                 
                 if (targetID === 'DEMO') {
                     // CASO ERROR (Sin QR)
-                    showMessage(
-                        'error', 
-                        '❌ ERROR: No se detectó ninguna cancha', 
-                        'Debes escanear el código QR de la cancha para poder enviar la configuración.'
-                    );
+                    showMessage('error', t('msg.noCourtTitle'), t('msg.noCourtBody'));
                 } else {
                     // CASO ÉXITO (Con QR)
-                    showMessage(
-                        'success', 
-                        '✅ ¡Listo!', 
-                        'Marcador actualizado.<br>¡A jugar!'
-                    );
+                    showMessage('success', t('msg.successTitle'), t('msg.successBody'));
                 }
                 
             }, 500);
@@ -1102,12 +1291,12 @@ Beneficios de la app móvil:
         fetch(apiUrl, { mode: 'no-cors' }) 
             .then(() => {
                 setTimeout(() => {
-                    alert('📡 Enviado por WiFi Local.\n\n(Asegúrate de estar conectado a la red PadelBoard_AP)');
+                    alert(t('alert.sentLocal'));
                 }, 100);
             })
             .catch(error => {
                 console.error('Error total:', error);
-                alert(`❌ ERROR DE CONEXIÓN\n\nNo se pudo enviar ni por Internet ni por WiFi Local.\n\n1. Revisa tu conexión a internet.\n2. O conéctate al WiFi del marcador.`);
+                alert(t('alert.connectionError'));
             });
     }
 
@@ -1132,8 +1321,7 @@ Beneficios de la app móvil:
             document.getElementById('customGames').value = '';
  
             // Resetear Tipo de Juego (Tarjeta Resumen)
-            document.getElementById('game-type-summary-title').textContent = 'Al mejor de 3';
-            document.getElementById('game-type-summary-desc').textContent = 'Formato clásico (por defecto)';
+            renderGameTypeSummary();
             
             document.querySelectorAll('#scoring-golden, #scoring-advantage').forEach(btn => {
                 btn.classList.remove('selected');
@@ -1160,11 +1348,11 @@ Beneficios de la app móvil:
             };
 
             if (!players.jugador1 || !players.jugador2 || !players.jugador3 || !players.jugador4) {
-                alert('Por favor, completa todos los nombres de los jugadores.');
+                alert(t('alert.missingPlayers'));
                 return;
             }
             if (!config.gameType || !config.scoring || !config.sideChange) {
-                alert('Por favor, completa toda la configuración del partido.');
+                alert(t('alert.missingConfig'));
                 return;
             }
 
@@ -1193,15 +1381,15 @@ Beneficios de la app móvil:
             // Cambiar color del título según sea éxito o error
             if (type === 'error') {
                 titleEl.className = "text-2xl font-bold mb-3 text-red-400"; // Rojo para error
-                btn.textContent = "Entendido";
+                btn.textContent = t('msg.ok');
                 btn.onclick = closeMessageModal; // Solo cierra la ventanita
                 
             } else {
                 titleEl.className = "text-2xl font-bold mb-3 text-green-400"; // Verde para éxito
-                btn.textContent = "Salir";
+                btn.textContent = t('msg.exit');
                 btn.onclick = function() {
                 // Cambiamos texto para que vean que la app está respondiendo
-                btn.textContent = "Cerrando...";
+                btn.textContent = t('msg.closing');
                 btn.style.opacity = "0.7";
                 
                 // Pequeña pausa de 300ms para que lean "Cerrando..." y luego adiós
@@ -1891,8 +2079,8 @@ Beneficios de la app móvil:
             document.getElementById('scoring-golden').classList.add('selected');
             document.getElementById('side-set').classList.add('selected');
             
-            // Actualizar el resumen con los valores por defecto
-            updateSummary();
+            // Aplicar idioma (también actualiza el resumen con los valores por defecto)
+            applyLanguage();
         });
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98c0e80030e0824f',t:'MTc2MDA0NDY2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
@@ -1912,7 +2100,7 @@ Beneficios de la app móvil:
             <p id="msgBody" class="text-lg opacity-90 px-1 leading-relaxed text-gray-100"></p>
         </div>
         
-        <button type="button" onclick="closeMessageModal()" class="btn-glass-action">
+        <button type="button" onclick="closeMessageModal()" class="btn-glass-action" data-i18n="msg.ok">
             Entendido
         </button>
     </div>
